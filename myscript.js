@@ -4,13 +4,10 @@
 // - Prendendo come riferimento il layout di esempio presente nell’html, stampiamo tutte le card del nostro team.
 // - Utilizziamo poi gli input presenti nella pagina per permettere all’utente di aggiungere nuovi membri del team.
 
-// 1 Creo un array che contiene gli oggetti che mi vanno a costituire le card
-// 2 Seleziono il div dove stampare le mie carte
-// 3 
-
+// Creo un array che contiene gli oggetti che mi vanno a costituire le card
 let team = [
     {
-        "immagine" : "img/wayne-barnett-founder-ceo.jpg",
+        "immagine" : "img/wayne-barnett-founder-ceo.jpg",  // oggetto
         "nome" : "Wayne Barnett",
         "descrizione" : "Founder & CEO"
     },
@@ -45,61 +42,58 @@ let team = [
         "descrizione" : "Office Manager"
     }
 ]
-
+// creo una variante che va a prendere il percorso dove stampare tutte le carte
 const teamContainer = document.querySelector(".team-container")
 
-let teamCard =""
-for(let i = 0; i < team.length; i++) {
-    var objTeam = team[i];
-    console.log(objTeam.nome);
-    teamCard += `
-        <div class="team-card">
-            <div class="card-image">
-                <img
-                    src="${objTeam.immagine}"
-                    alt="${objTeam.nome}"
-                />
-            </div>
-            <div class="card-text">
-                <h3>${objTeam.nome}</h3>
-                <p>${objTeam.descrizione}</p>
-            </div>
-        </div>`
-}
+
+stampaCard();
 
 // pusha un nuovo membro
 let btn = document.getElementById("addMemberButton")
 btn.addEventListener("click",
 function () {
+    // valori form
     var nameC = document.getElementById("name").value;
     var role = document.getElementById("role").value;
     var img = document.getElementById("image").value;
     
+    // push ogetto all'array
     let teamCard = {
-        "immagine" : img.value,
-        "nome" : nameC.value,
-        "descrizione" : role.value
+        "immagine" : img,
+        "nome" : nameC,
+        "descrizione" : role
     }
-        team.push(teamCard);
-        
-        console.log(nameC);
-        console.log(role);
-        console.log(img);
+    team.push(teamCard);
 
-        // teamCard += `
-        //     <div class="team-card">
-        //         <div class="card-image">
-        //             <img
-        //              src="${objTeam.immagine}"
-        //              alt="${objTeam.nome}"
-        //             />
-        //         </div>
-        //         <div class="card-text">
-        //             <h3>${objTeam.nome}</h3>
-        //             <p>${objTeam.descrizione}</p>
-        //         </div>
-        //     </div>`
+    // ristampa tutte le carte nel html
+    stampaCard();
+});
+
+// funzione per stampare le carte
+function stampaCard() {
+    // var per inserire il contenuro delle carte
+    let teamCard =""
+    // prendo tutti gli oggetti nell'array
+    for(let i = 0; i < team.length; i++) {
+        // inserisco gli ogg in una variabile per poter selezionare le propietà 
+        var objTeam = team[i];
+        console.log(objTeam.nome);
+        // stampo testo html per il creare il contenuto delle carte nella var teamCard inserendo le propietà degli oggetti  
+        teamCard += `
+            <div class="team-card">
+                <div class="card-image">
+                    <img
+                        src="${objTeam.immagine}"
+                        alt="${objTeam.nome}"
+                    />
+                </div>
+                <div class="card-text">
+                    <h3>${objTeam.nome}</h3>
+                    <p>${objTeam.descrizione}</p>
+                </div>
+            </div>`
     }
-    )
 
-teamContainer.innerHTML = teamCard;
+    // stampo nel html
+    teamContainer.innerHTML = teamCard;
+}
