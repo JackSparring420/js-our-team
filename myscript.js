@@ -45,7 +45,7 @@ let team = [
 // creo una variante che va a prendere il percorso dove stampare tutte le carte
 const teamContainer = document.querySelector(".team-container")
 
-
+// stampo le carte
 stampaCard();
 
 // pusha un nuovo membro
